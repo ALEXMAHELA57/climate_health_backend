@@ -1,0 +1,34 @@
+### 🌦 Get Alerts (GET)
+GET http://127.0.0.1:8000/api/alerts/
+Accept: application/json
+
+
+### 🧠 Symptom Checker (POST)
+POST http://127.0.0.1:8000/api/symptoms/
+Content-Type: application/json
+
+{
+  "symptoms": "fever, diarrhea, headache",
+  "location": "Morogoro"
+}
+
+
+### 📱 Subscribe for Alerts (POST)
+POST http://127.0.0.1:8000/api/subscribe/
+Content-Type: application/json
+
+{
+  "name": "Alex Mahela",
+  "channel": "whatsapp",
+  "district": "Dodoma",
+  "contact": "+255700123456"
+}
+
+
+### 💬 Guidance Chatbot (POST)
+POST http://127.0.0.1:8000/api/guidance/
+Content-Type: application/json
+
+{
+  "question": "How does climate change affect malaria outbreaks in Tanzania?"
+}
