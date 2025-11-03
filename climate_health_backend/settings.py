@@ -4,13 +4,12 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = '4p5f@o-3u#x6x9d%6#d4i&%v8u7z&$7e3b^c6$+h3@-j8!k@p7'
-  # keep your existing one
-DEBUG = False  # ✅ Set to False for hosting
+DEBUG = False  # ✅ Disable debug in production
 
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    'climate-health-backend-2.onrender.com',  # ✅ your Render domain
+    'climate-health-backend-2.onrender.com',  # ✅ Your Render domain
 ]
 
 # ---------------------------------------------------------------------
@@ -23,15 +22,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'corsheaders',  # ✅ for frontend connection
-    'core',         # ✅ your app
+    'corsheaders',  # ✅ Add this before your app
+    'core',
 ]
 
 # ---------------------------------------------------------------------
 # MIDDLEWARE
 # ---------------------------------------------------------------------
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',  # ✅ must come before CommonMiddleware
+    'corsheaders.middleware.CorsMiddleware',  # ✅ Must come before CommonMiddleware
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -99,17 +98,19 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # ---------------------------------------------------------------------
-# CORS SETTINGS (for frontend)
+# ✅ CORS & CSRF SETTINGS (Frontend ↔ Backend connection)
 # ---------------------------------------------------------------------
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",  # ✅ your local React app
-    "https://your-frontend-domain.onrender.com",  # ✅ when you host frontend
+    "http://localhost:5173",  # Local React frontend
+    "https://climate-health-frontend.onrender.com",  # Replace when deployed frontend
 ]
-
 CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_HEADERS = True
+CORS_ALLOW_METHODS = ["GET", "POST", "OPTIONS"]
+
 CSRF_TRUSTED_ORIGINS = [
     "https://climate-health-backend-2.onrender.com",
-    "https://your-frontend-domain.onrender.com",
+    "https://climate-health-frontend.onrender.com",
 ]
 
 # ---------------------------------------------------------------------
