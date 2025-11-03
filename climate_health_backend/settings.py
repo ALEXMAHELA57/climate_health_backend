@@ -8,9 +8,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-CHANGE_THIS_KEY_FOR_PRODUCTION'
 
-DEBUG = True  # Set to False when deploying
+DEBUG = False  # Set to False when deploying
 
-ALLOWED_HOSTS = ['*']  # Change * to your domain later
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'climate-health-backend-2.onrender.com'
+]
+
 
 
 # ----------------------------------
