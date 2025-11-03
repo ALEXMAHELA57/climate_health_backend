@@ -1,26 +1,21 @@
 import os
 from pathlib import Path
 
-# ----------------------------------
-# BASE PROJECT CONFIGURATION
-# ----------------------------------
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-CHANGE_THIS_KEY_FOR_PRODUCTION'
-
-DEBUG = False  # Set to False when deploying
+SECRET_KEY = '4p5f@o-3u#x6x9d%6#d4i&%v8u7z&$7e3b^c6$+h3@-j8!k@p7'
+  # keep your existing one
+DEBUG = False  # ✅ Set to False for hosting
 
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    'climate-health-backend-2.onrender.com'
+    'climate-health-backend-2.onrender.com',  # ✅ your Render domain
 ]
 
-
-
-# ----------------------------------
+# ---------------------------------------------------------------------
 # INSTALLED APPS
-# ----------------------------------
+# ---------------------------------------------------------------------
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -28,16 +23,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core',  # your main app
+    'corsheaders',  # ✅ for frontend connection
+    'core',         # ✅ your app
 ]
 
-
-# ----------------------------------
+# ---------------------------------------------------------------------
 # MIDDLEWARE
-# ----------------------------------
+# ---------------------------------------------------------------------
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  # ✅ must come before CommonMiddleware
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # for static files in production
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -46,20 +41,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-
-# ----------------------------------
-# URL CONFIGURATION
-# ----------------------------------
 ROOT_URLCONF = 'climate_health_backend.urls'
 
-
-# ----------------------------------
-# TEMPLATES (for React frontend integration)
-# ----------------------------------
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # where React build will go
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -72,16 +59,11 @@ TEMPLATES = [
     },
 ]
 
-
-# ----------------------------------
-# WSGI APPLICATION
-# ----------------------------------
 WSGI_APPLICATION = 'climate_health_backend.wsgi.application'
 
-
-# ----------------------------------
-# DATABASE (SQLite by default)
-# ----------------------------------
+# ---------------------------------------------------------------------
+# DATABASE
+# ---------------------------------------------------------------------
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -89,36 +71,48 @@ DATABASES = {
     }
 }
 
-
-# ----------------------------------
+# ---------------------------------------------------------------------
 # PASSWORD VALIDATION
-# ----------------------------------
+# ---------------------------------------------------------------------
 AUTH_PASSWORD_VALIDATORS = [
-    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',},
-    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',},
-    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',},
-    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-
-# ----------------------------------
+# ---------------------------------------------------------------------
 # INTERNATIONALIZATION
-# ----------------------------------
+# ---------------------------------------------------------------------
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'Africa/Nairobi'
 USE_I18N = True
 USE_TZ = True
 
-
-# ----------------------------------
-# STATIC FILES (for Django & React)
-# ----------------------------------
+# ---------------------------------------------------------------------
+# STATIC & MEDIA FILES
+# ---------------------------------------------------------------------
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# ----------------------------------
-# DEFAULT PRIMARY KEY FIELD TYPE
-# ----------------------------------
+# ---------------------------------------------------------------------
+# CORS SETTINGS (for frontend)
+# ---------------------------------------------------------------------
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",  # ✅ your local React app
+    "https://your-frontend-domain.onrender.com",  # ✅ when you host frontend
+]
+
+CORS_ALLOW_CREDENTIALS = True
+CSRF_TRUSTED_ORIGINS = [
+    "https://climate-health-backend-2.onrender.com",
+    "https://your-frontend-domain.onrender.com",
+]
+
+# ---------------------------------------------------------------------
+# DEFAULT PRIMARY KEY
+# ---------------------------------------------------------------------
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
