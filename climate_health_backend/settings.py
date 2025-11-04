@@ -9,8 +9,9 @@ DEBUG = False  # ✅ Disable debug in production
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    'climate-health-backend-2.onrender.com',  # ✅ Your Render domain
+    'climate-health-backend-fexw.onrender.com',  # ✅ exact domain from Render
 ]
+
 
 # ---------------------------------------------------------------------
 # INSTALLED APPS
@@ -101,16 +102,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # ✅ CORS & CSRF SETTINGS (Frontend ↔ Backend connection)
 # ---------------------------------------------------------------------
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",  # Local React frontend
-    "https://climate-health-frontend.onrender.com",  # Replace when deployed frontend
+    "http://localhost:5173",
+    "https://climate-health-backend-fexw.onrender.com",
 ]
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_ALL_HEADERS = True
 CORS_ALLOW_METHODS = ["GET", "POST", "OPTIONS"]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://climate-health-backend-2.onrender.com",
-    "https://climate-health-frontend.onrender.com",
+    "https://climate-health-backend-fexw.onrender.com",
 ]
 
 # ---------------------------------------------------------------------
