@@ -103,6 +103,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # ---------------------------------------------------------------------
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
+    "https://climate-health-frontend.onrender.com",
     "https://climate-health-backend-fexw.onrender.com",
 ]
 CORS_ALLOW_CREDENTIALS = True
