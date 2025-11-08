@@ -101,16 +101,38 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # ---------------------------------------------------------------------
 # ✅ CORS & CSRF SETTINGS (Frontend ↔ Backend connection)
 # ---------------------------------------------------------------------
+# ---------------------------------------------------------------------
+# ✅ CORS & CSRF SETTINGS (Frontend ↔ Backend connection)
+# ---------------------------------------------------------------------
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-    "https://climate-health-frontend.onrender.com",
-    "https://climate-health-backend-fexw.onrender.com",
+    "http://localhost:5173",  # local dev
+    "https://climate-health-frontend.onrender.com",  # frontend on Render
 ]
+
+# Allow cross-origin credentials and standard methods
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_ALL_HEADERS = True
-CORS_ALLOW_METHODS = ["GET", "POST", "OPTIONS"]
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+]
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+]
 
 CSRF_TRUSTED_ORIGINS = [
+    "https://climate-health-frontend.onrender.com",
     "https://climate-health-backend-fexw.onrender.com",
 ]
 
